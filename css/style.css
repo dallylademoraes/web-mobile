@@ -1,0 +1,7 @@
+h2 {
+  background-color: green;
+  color: white;
+}
+label, input, select, textarea {
+  display: block;
+}
