@@ -13,10 +13,30 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">Cadastro de Veículos</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Links da Esquerda -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cadastrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Anúncios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="http://127.0.0.1:8000/logout/">Logout</a>
+                </li>
+            </ul>
+
+            <!-- Campo de Pesquisa Centralizado -->
+            <form class="d-flex ms-0" role="search" method="get" action="{% url 'pesquisar_veiculo' %}">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar veículo" name="q" aria-label="Pesquisar">
+                <button class="btn btn-outline-light" type="submit">Pesquisar</button>
+            </form>
+        </div>
     </div>
 </nav>
 
@@ -35,10 +55,9 @@
         {% for veiculo in veiculos %}
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card h-100 shadow-sm">
-                    
+
                     {% if veiculo.imagem %}
-                    <img src="{% static 'img/carro.jpg' %}" class="card-img-top" alt="Fiat Mobi 2023">
-                    
+                        <img src="{% static 'img/carro.jpg' %}" class="card-img-top" alt="Fiat Mobi 2023">
                     {% else %}
                         <img src="{% static 'img/images.jpeg' %}" class="card-img-top" alt="Sem imagem">
                     {% endif %}
@@ -46,7 +65,7 @@
                     <div class="card-header bg-info text-white text-center">
                         <h5 class="card-title mb-0">{{ veiculo.marca }} - {{ veiculo.modelo }}</h5>
                     </div>
-                    
+
                     <div class="card-body">
                         <ul class="list-unstyled">
                             <li><strong>Ano:</strong> {{ veiculo.ano }}</li>
