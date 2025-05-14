@@ -21,7 +21,7 @@
             <!-- Links da Esquerda -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cadastrar</a>
+                    <a class="nav-link" href="http://127.0.0.1:8000/veiculo/novo/">Cadastrar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Anúncios</a>
@@ -56,10 +56,10 @@
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card h-100 shadow-sm">
 
-                    {% if veiculo.imagem %}
-                        <img src="{% static 'img/carro.jpg' %}" class="card-img-top" alt="Fiat Mobi 2023">
+                    {% if veiculo.foto %}
+                        <img src="{{veiculo.foto.url }}" class="card-img-top" alt="">
                     {% else %}
-                        <img src="{% static 'img/images.jpeg' %}" class="card-img-top" alt="Sem imagem">
+                        <img src="" class="card-img-top" alt="Sem imagem">
                     {% endif %}
 
                     <div class="card-header bg-info text-white text-center">
