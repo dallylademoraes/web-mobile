@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Anúncios de Veículos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+        }
+        .card-body ul li {
+            margin-bottom: 6px;
+        }
+        .btn-sm {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="mb-2">Anúncios de Veículos</h2>
+                <p class="text-muted">{{ veiculos|length }} veículo(s) encontrado(s)</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for veiculo in veiculos %}
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-lg rounded-3">
+                        {% if veiculo.foto %}
+                            <img src="{{ veiculo.foto.url }}" class="card-img-top" alt="Foto de {{ veiculo.get_marca_display }} {{ veiculo.modelo }}">
+                        {% else %}
+                            <img src="{% static 'img/sem-imagem.png' %}" class="card-img-top" alt="Sem imagem disponível">
+                        {% endif %}
+                        <div class="card-header">
+                            {{ veiculo.get_marca_display }} {{ veiculo.modelo }}
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li><strong>Ano:</strong> {{ veiculo.ano }}</li>
+                                <li><strong>Cor:</strong> {{ veiculo.get_cor_display }}</li>
+                                <li><strong>Combustível:</strong> {{ veiculo.get_combustivel_display }}</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'detalhes-anuncio' veiculo.id %}" class="btn btn-success btn-sm" target="_blank">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info text-center">
+                        Nenhum anúncio disponível.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

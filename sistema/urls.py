@@ -26,6 +26,7 @@ urlpatterns = [
     path('', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
     path('veiculo/', include('veiculo.urls'), name='veiculo'),
+    path('anuncios/', include('anuncio.urls')),
 ]
 # Adicione isso ao final:
 if settings.DEBUG:

@@ -3,11 +3,12 @@ from django.shortcuts import render
 from veiculo.forms import FormularioVeiculo
 from veiculo.models import Veiculo
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic import View
 from django.core.exceptions import ObjectDoesNotExist
+#from django.contrib.auth.mixins import LoginRequiredMixin
 
-class ListarVeiculos(ListView):
+class ListarVeiculos(ListView): # LoginRequiredMixin
     """
     View para listar veículos cadastrados.
     """
@@ -30,7 +31,7 @@ class PesquisarVeiculoView(ListView):
             return Veiculo.objects.filter(modelo__icontains=termo)
         return Veiculo.objects.all()
 
-class CriarVeiculos(CreateView):
+class CriarVeiculos(CreateView): # LoginRequiredMixin, 
     """
     View para a criação de novos veiculos
     """
@@ -48,3 +49,21 @@ class FotoVeiculo(View):
             raise Http404("Foto nõa encontrada ou acesso não autorizado!")
         except Exception as exception:
             raise exception
+
+class EditarVeiculos(UpdateView): #LoginRequiredMixin
+    """
+    View para a edição de veiculos já cadastrados.
+    """
+    model = Veiculo
+    form_class = FormularioVeiculo
+    template_name = 'veiculo/editar.html'
+    success_url = reverse_lazy('listar-veiculos')
+
+class DeletarVeiculos(DeleteView): #LoginRequiredMixin
+    """
+    View para a exclusão de veiculos.
+    """
+    model = Veiculo
+    template_name = 'veiculo/deletar.html'
+    success_url = reverse_lazy('listar-veiculos')
+

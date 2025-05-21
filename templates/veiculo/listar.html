@@ -59,7 +59,7 @@
                     <a class="nav-link" href="http://127.0.0.1:8000/veiculo/novo/">Cadastrar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Anúncios</a>
+                    <a class="nav-link" href="{% url 'listar-anuncios' %}">Anúncios</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger" href="http://127.0.0.1:8000/logout/">Logout</a>
@@ -106,10 +106,9 @@
                             <li><strong>Combustível:</strong> {{ veiculo.combustivel }}</li>
                         </ul>
                     </div>
-
                     <div class="card-footer d-flex justify-content-between">
-                        <a href="#" class="btn btn-primary btn-sm">Ver Detalhes</a>
-                        <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente apagar este veículo?');">Apagar</a>
+                        <a href="{{veiculo.id}}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="deletar/{{veiculo.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente apagar este veículo?');">Apagar</a>
                     </div>
                 </div>
             </div>
