@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Anúncios</title>
+</head>
+<body>
+    <h1>Lista de Veículos Anunciados</h1>
+
+    <ul>
+        {% for veiculo in veiculos %}
+            <li>
+                <strong>{{ veiculo.nome }}</strong><br>
+                Preço: R$ {{ veiculo.preco }}<br>
+                Descrição: {{ veiculo.descricao }}
+            </li>
+        {% empty %}
+            <li>Nenhum veículo foi encontrado.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

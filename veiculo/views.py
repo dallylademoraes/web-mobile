@@ -6,7 +6,19 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic import View
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.generics import ListAPIView
+from rest_framework import permissions
+from veiculo.serializers import SerializadorVeiculo
+from rest_framework.authentication import TokenAuthentication
 #from django.contrib.auth.mixins import LoginRequiredMixin
+
+class APIListarVeiculos(ListAPIView):
+    serializer_class = SerializadorVeiculo
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Veiculo.objects.all()
 
 class ListarVeiculos(ListView): # LoginRequiredMixin
     """

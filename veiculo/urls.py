@@ -7,5 +7,6 @@ urlpatterns = [
     path('novo/', CriarVeiculos.as_view(), name="criar-veiculo"),
     path('fotos/<str:arquivo>/', FotoVeiculo.as_view(), name='foto-veiculo'),
     path('<int:pk>/', EditarVeiculos.as_view(), name='editar-veiculos'),
-    path('deletar/<int:pk>/', DeletarVeiculos.as_view(), name='deletar-veiculos')
+    path('deletar/<int:pk>/', DeletarVeiculos.as_view(), name='deletar-veiculos'),
+    path('api/', APIListarVeiculos.as_view(), name='api-listar-veiculo')
 ]
